@@ -37,7 +37,7 @@ const TabNavigatorConfig = {
 const Home = ()=> {
 return(
     <Tab.Navigator {...TabNavigatorConfig}>
-    <Tab.Screen name="Deck" component={Decks} />
+    <Tab.Screen name="Decks" component={Decks} />
     <Tab.Screen name="New Deck" component={NewDeck} />
     </Tab.Navigator>
 )

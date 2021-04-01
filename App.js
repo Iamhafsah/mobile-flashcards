@@ -1,4 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import reducer from './reducers'
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
@@ -22,11 +25,14 @@ const AppStack = ()=> {
 }
 
 export default function App() {
+  const store = createStore(reducer)
   return (
-   <NavigationContainer>
-     <StatusBar backgroundColor='purple'/>
-      <AppStack/>
-   </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <StatusBar backgroundColor='purple'/>
+          <AppStack/>
+        </NavigationContainer>
+      </Provider>
   );
 }
 

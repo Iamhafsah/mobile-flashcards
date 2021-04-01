@@ -19,11 +19,11 @@ export let decks = {
         questions: [
             {
                 question: 'What does HTML mean ?',
-                answer: 'HyperText Markup Language.'
+                answer: 'HyperText Markup Language'
             },
             {
                 question: 'Is HTML important in the web development process?',
-                answer: 'Yes, HTML is very important in the web development process.'
+                answer: 'Yes, HTML is very important in the web development process'
             }
         ]
     },
@@ -33,17 +33,13 @@ export let decks = {
         questions: [
             {
                 question: 'What does CSS mean ?',
-                answer: 'Cascading Style Sheets.'
+                answer: 'Cascading Style Sheets'
             },
             {
                 question: 'Is CSS important in adding functionality to an app?',
-                answer: 'Not exactly, CSS is mainly used in beautifying applications.'
+                answer: 'Not exactly, CSS is mainly used in beautifying applications'
             }
         ]
     }
 }
 
-
-// export const getDecks = (decks) => {
-//     return decks
-// }
