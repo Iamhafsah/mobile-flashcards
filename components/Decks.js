@@ -3,7 +3,6 @@ import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
 import {decks} from '../utils/helpers'
 import jo from '../utils/api'
 
-console.log(jo)
 
 const Decks = ({navigation}) => {
     return (

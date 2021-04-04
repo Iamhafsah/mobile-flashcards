@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Text, View , TextInput, TouchableOpacity} from 'react-native'
+import {connect} from 'react-redux'
 
 const NewDeck = () => {
+    const [deckName, setDeckName] = useState('')
     return (
         <View style={styles.wrapper} >
             <Text style={styles.heading} >

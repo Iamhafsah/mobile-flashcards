@@ -1,13 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {decks} from './helpers'
 
-const decks = decks
 
 const DECK_STORAGE_KEY = 'flashcards'
 
 AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
-export let jo = AsyncStorage.getItem(DECK_STORAGE_KEY)
-console.log(jo);
+
+const getDecks = ()=> {
+    return AsyncStorage.getItem(DECK_STORAGE_KEY).then(deck=> {
+      const newDecks = JSON.parse(deck)
+       return console.log(newDecks)
+    })
+}
+
 
 // export const addNewDeck = async(decks) => {
 //     try{

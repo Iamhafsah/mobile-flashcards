@@ -5,15 +5,14 @@ import reducer from './reducers'
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Home from './components/Home'
 import Cards from './components/Cards'
 
 
 const Stack = createStackNavigator();
 
-
-const AppStack = ()=> {
+const AppStack = () => {
   return(
     <Stack.Navigator initialRouteName="Home">
 
