@@ -60,7 +60,6 @@ class Decks extends Component {
              style={styles.deck} 
              onPress={() => navigation.navigate("Deck", { title: deckTitle })}
              >
-              {/* <Text>{i}</Text> */}
               <Text style={styles.title}>{deckTitle}</Text>
              </TouchableOpacity>
             ))}
@@ -73,6 +72,8 @@ class Decks extends Component {
 
 function mapStateToProps(decks) {
   const deckList = Object.keys(decks);
+  const val = Object.values(decks)
+  console.log(typeof val.questions);
   return {
     deckList,
     decks

@@ -7,7 +7,6 @@ class DeckInterface extends Component {
 
         const {navigation, route, cardNumber} = this.props
         const { title } = route.params;
-        console.log(title);
         return (
             <View>
                 <Text >{title}</Text>
@@ -41,4 +40,4 @@ function mapStateToProps(decks, { deckTitle }) {
   };
 }
 
-export default connect(mapStateToProps) (DeckInterface)
+export default connect(mapStateToProps)(DeckInterface)

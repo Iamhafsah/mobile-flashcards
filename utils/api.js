@@ -42,10 +42,22 @@ export const saveDeck = async(deckTitle) => {
   return await getDecks()
 }
 
-// To add card to deck
-export const addCard = async (deckTitle, card) => {
+// To save card to deck
+export const saveCard = async (deckTitle, card) => {
   const decks = await AsyncStorage.getItem(DECK_KEY)
   const data = JSON.parse(decks)
   data[deckTitle].questions.push(card)
   AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
 }
+
+// export function saveCard(deckTitle, card) {
+//   return AsyncStorage.getItem(DECK_KEY).then(results => {
+//     const data = JSON.parse(results);
+//     Object.keys(data).map(info => {
+//       if (info === deckTitle) {
+//         data[info].questions.push(card);
+//       }
+//     });
+//     AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
+//   });
+// }

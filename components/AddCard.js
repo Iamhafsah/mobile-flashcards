@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View , TextInput, TouchableOpacity} from 'react-native'
+import { Text, View , TextInput, TouchableOpacity, Alert} from 'react-native'
+import { connect } from 'react-redux'
 import {addCard} from '../actions'
-import {addCard as addNewCard} from '../utils/api'
+import {saveCard} from '../utils/api'
 
 class AddCard extends Component {
     state={
@@ -25,9 +26,26 @@ class AddCard extends Component {
         const {dispatch, route} = this.props
         const { title } = route.params;
         const card = {question, answer}
-        console.log(card);
+     
 
-        // dispatch(addCard(title, card))
+        if(question != '' && answer != ''){
+            dispatch(addCard(card, title))
+            saveCard(title, card)
+            //    console.log(title, card);
+            this.setState(prev=>({
+                ...prev,
+                question: '',
+                answer: ''
+            }))
+        }else{
+            Alert.alert(
+                'Hi there,',
+                'Please make sure no field is empty',
+                [
+                    {text: 'OK'}
+                ]
+            )
+        }
     }
 
     render() {
@@ -62,4 +80,4 @@ class AddCard extends Component {
     }
 }
 
-export default AddCard
+export default connect()(AddCard)

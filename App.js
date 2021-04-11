@@ -54,7 +54,7 @@ const AppStack = () => {
 }
 
 export default function App() {
-  const store = createStore(reducer)
+  const store = createStore(reducer, middleware)
   return (
       <Provider store={store}>
         <NavigationContainer>
