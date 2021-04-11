@@ -1,34 +1,88 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
-import {decks} from '../utils/helpers'
-import jo from '../utils/api'
+import {receiveDecks} from '../actions'
+import {getDecks} from '../utils/api'
+import {Ionicons} from '@expo/vector-icons'
 
 
-const Decks = ({navigation}) => {
-    return (
-        <View style={styles.container}>
+// const Decks = ({navigation}) => {
+//     return (
+//         <View style={styles.container}>
         
-        <View style={styles.headingWrapper}>
-          <Text style={styles.heading}>Mobile Flashcards</Text>
-          <Text style={styles.info}>Click on a deck to view cards</Text>
-        </View>
+//         <View style={styles.headingWrapper}>
+//           <Text style={styles.heading}>Mobile Flashcards</Text>
+//           <Text style={styles.info}>Click on a deck to view cards</Text>
+//         </View>
 
-        {Object.values(decks).map((deck, i)=> (
-          <TouchableOpacity  
-          key={i} 
-          style={styles.deck} 
-          onPress={()=> navigation.navigate('Cards')}
-          >
-            <Text style={styles.title}>{deck.title}</Text>
-            <Text style={styles.text}>{deck.questions.length} cards</Text>
-            <Text>{i}</Text>
+//         {Object.values(decks).map((deck, i)=> (
+//           <TouchableOpacity  
+//           key={i} 
+//           style={styles.deck} 
+//           onPress={()=> navigation.navigate('Cards')}
+//           >
+//             <Text style={styles.title}>{deck.title}</Text>
+//             <Text style={styles.text}>{deck.questions.length} cards</Text>
+//             <Text>{i}</Text>
+//           </TouchableOpacity>
+//         ))}
+//       </View>
+//     )
+// }
+
+
+
+// export default Decks
+
+class Decks extends Component {
+ componentDidMount(){
+  const {dispatch} = this.props
+}
+ 
+  render() {
+    const {deckList, decks, navigation} = this.props
+    const deckLength = decks.length
+    return (
+      <>
+        {!decks ? (
+          <View style={styles.wrap}>
+          <Text style={styles.addText}>No decks available </Text>
+          <TouchableOpacity style={styles.addButton} onPress={()=> this.props.navigation.navigate('New Deck')} >
+            <Ionicons name='add-outline' size={70} color={'white'} style={{marginLeft: 5}} />
           </TouchableOpacity>
-        ))}
-      </View>
+        </View>
+        ):
+        (
+          <View style={styles.container}>
+            {deckList.map((deckTitle)=> (
+             <TouchableOpacity 
+             key={deckTitle} 
+             style={styles.deck} 
+             onPress={() => navigation.navigate("Deck", { title: deckTitle })}
+             >
+              {/* <Text>{i}</Text> */}
+              <Text style={styles.title}>{deckTitle}</Text>
+             </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      </>
     )
+  }
 }
 
-export default Decks
+function mapStateToProps(decks) {
+  const deckList = Object.keys(decks);
+  return {
+    deckList,
+    decks
+  };
+}
+
+
+export default connect(mapStateToProps)(Decks)
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -36,6 +90,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         paddingTop: '15%'
+      },
+      wrap:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
       },
       headingWrapper:{
         marginBottom: 22,
@@ -66,5 +125,16 @@ const styles = StyleSheet.create({
       text:{
         color: '#fef8',
         fontSize: 20
+      },
+      addButton:{
+        backgroundColor: 'purple',
+        width: '21%',
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      addText:{
+        fontSize: 17,
+        marginBottom: 10
       }
 })

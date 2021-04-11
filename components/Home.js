@@ -1,7 +1,6 @@
 import React from 'react'
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+// import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Decks from './Decks'
