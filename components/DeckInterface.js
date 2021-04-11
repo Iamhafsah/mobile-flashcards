@@ -17,7 +17,7 @@ class DeckInterface extends Component {
                     <Text >{cardNumber} Card(s)</Text>
                 )}
 
-                <TouchableOpacity onPress={()=> navigation.navigate('Add Card')}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Add Card', {title, title})}>
                     <Text>Add Card</Text>
                 </TouchableOpacity>
 

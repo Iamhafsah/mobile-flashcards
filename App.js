@@ -8,21 +8,48 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Home from './components/Home'
-import Cards from './components/Cards'
+// import Cards from './components/Cards'
 import DeckInterface from './components/DeckInterface'
-
+import AddCard from './components/AddCard'
 
 const Stack = createStackNavigator();
+const white = 'white'
+const purple = 'purple'
 
+const StackConfig = {
+  Home:{
+    name: "Home",
+    component: Home,
+    options: {headerShown: false}
+  }, 
+  Deck:{
+    name: "Deck",
+    component: DeckInterface,
+    options: {
+      headerTintColor: white,
+      headerStyle:{
+        backgroundColor: purple
+      }
+    }
+  },
+  AddCard:{
+    name: "Add Card",
+    component: AddCard,
+    options: {
+      headerTintColor: white,
+      headerStyle:{
+        backgroundColor: purple
+      }
+    }
+  }
+}
 const AppStack = () => {
   return(
     <Stack.Navigator initialRouteName="Home">
-
-    <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-    <Stack.Screen name="Cards" component={Cards} options={{headerTintColor: 'white', headerStyle:{backgroundColor: 'purple'}}} />
-    <Stack.Screen name="Deck" component={DeckInterface} options={{headerTintColor: 'white', headerStyle:{backgroundColor: 'purple'}}} />
-
-  </Stack.Navigator>
+      <Stack.Screen {...StackConfig['Home']}/>
+      <Stack.Screen {...StackConfig['Deck']}/>
+      <Stack.Screen {...StackConfig['AddCard']}/>
+    </Stack.Navigator>
   )
 }
 
