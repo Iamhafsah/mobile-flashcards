@@ -73,7 +73,7 @@ class Decks extends Component {
 function mapStateToProps(decks) {
   const deckList = Object.keys(decks);
   const val = Object.values(decks)
-  console.log(typeof val.questions);
+  console.log(typeof val.questions, 'o');
   return {
     deckList,
     decks

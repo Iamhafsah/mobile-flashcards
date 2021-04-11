@@ -34,9 +34,10 @@ class NewDeck extends Component{
             dispatch(addDeck(deckTitle));
             saveDeck(deckTitle);
             navigation.navigate('Deck', { title: deckTitle })
-            this.setState({ 
-                deckTitle: '' 
-            })
+            this.setState(prev=>({
+                ...prev,
+                deckTitle: ''
+            }))
         }
 
     }

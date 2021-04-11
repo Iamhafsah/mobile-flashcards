@@ -47,7 +47,9 @@ export const saveCard = async (deckTitle, card) => {
   const decks = await AsyncStorage.getItem(DECK_KEY)
   const data = JSON.parse(decks)
   data[deckTitle].questions.push(card)
+  console.log(data[deckTitle])
   AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
+  
 }
 
 // export function saveCard(deckTitle, card) {
