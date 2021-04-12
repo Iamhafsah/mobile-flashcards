@@ -38,18 +38,19 @@ class Decks extends Component {
     )
 }
   render() {
-    const {deckList, decks, navigation} = this.props
+    const {deckList, navigation, deckLength} = this.props
 
     return (
       <ScrollView>
-      
-        <TouchableOpacity  onPress={() => this.deleteDecksAlert()}>
+       {deckLength > 0 && (       
+          <TouchableOpacity  onPress={() => this.deleteDecksAlert()}>
           <Text style={{textAlign: 'right', padding: 10}} >Clear All Decks</Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+       )}
         <View style={styles.container}>
        
 
-        {!decks ? (
+        {!deckLength > 0 ? (
           <View style={styles.wrap}>
           <Text style={styles.addText}>No decks available. Create new deck. </Text>
           <TouchableOpacity style={styles.addButton} onPress={()=> this.props.navigation.navigate('New Deck')} >
@@ -88,11 +89,11 @@ class Decks extends Component {
 
 function mapStateToProps(decks) {
   const deckList = Object.values(decks);
- const length = deckList.questions
- console.log(length);
+  const deckLength = deckList.length
+
   return {
     deckList,
-    decks
+    deckLength
   };
 }
 
@@ -105,14 +106,12 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        
-        // alignItems: 'center',
         justifyContent: 'center',
         paddingTop: '5%'
       },
       wrap:{
-        justifyContent: 'center',
-        // alignItems: 'center',
+        alignItems: 'center',
+        marginTop: '50%',
         flex: 1
       },
       headingWrapper:{
