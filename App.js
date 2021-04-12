@@ -3,15 +3,15 @@ import {createStore} from 'redux'
 import middleware from './middleware' 
 import {Provider} from 'react-redux'
 import reducer from './reducers'
-import React from 'react';
+import React, {Component} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet} from 'react-native';
 import Home from './components/Home'
-// import Cards from './components/Cards'
 import DeckInterface from './components/DeckInterface'
 import QuizInterface from './components/QuizInterface'
 import AddCard from './components/AddCard'
+import {setLocalNotification} from './utils/helpers'
 
 const Stack = createStackNavigator();
 const white = 'white'
@@ -65,16 +65,19 @@ const AppStack = () => {
   )
 }
 
-export default function App() {
-  const store = createStore(reducer, middleware)
+export default class App extends Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
+  render(){
   return (
-      <Provider store={store}>
+      <Provider store={createStore(reducer, middleware)}>
         <NavigationContainer>
           <StatusBar backgroundColor='purple'/>
           <AppStack/>
         </NavigationContainer>
       </Provider>
-  );
+  )}
 }
 
 const styles = StyleSheet.create({

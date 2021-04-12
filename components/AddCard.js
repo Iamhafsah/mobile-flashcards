@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View , TextInput, TouchableOpacity, Alert} from 'react-native'
+import { Text, View , TextInput, TouchableOpacity, Alert, StyleSheet, KeyboardAvoidingView} from 'react-native'
 import { connect } from 'react-redux'
 import {addCard} from '../actions'
 import {saveCard} from '../utils/api'
@@ -55,29 +55,75 @@ class AddCard extends Component {
 
         
         return (
-            <View>
-                <Text> Add a new card to your {title} deck</Text>
+            <View style={styles.container}>
+                <Text style={styles.pageIntro}> Add a new card to your {title} deck</Text>
 
-                <View>
-                   <Text>Enter a question </Text>
+                <KeyboardAvoidingView style={styles.innerContainer}>
+                   <Text style={styles.cardNumber}>Enter a question </Text>
                    <TextInput
                    value={question}
                    onChangeText={this.onInputQuestion}
+                   style={styles.input}
                    />
 
-                   <Text>Enter correct answer</Text>
+                   <Text style={styles.cardNumber}>Enter correct answer</Text>
                    <TextInput
                    value={answer}
                    onChangeText={this.onInputAnswer}
+                   style={styles.input}
                    />
 
-                   <TouchableOpacity onPress={this.onSubmitCard} >
-                       <Text>Add Card</Text>
+                   <TouchableOpacity onPress={this.onSubmitCard} style={styles.button} >
+                       <Text style={styles.buttonText}>Add Card</Text>
                    </TouchableOpacity>
-                </View>
+                </KeyboardAvoidingView>
             </View>
         )
     }
 }
 
 export default connect()(AddCard)
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        alignItems: 'center',
+    },
+    innerContainer:{
+        backgroundColor: 'purple',
+        marginTop: 40,
+        padding: 40,
+        borderRadius: 8
+    },
+    pageIntro:{
+        fontSize: 20,
+        marginTop: 15,
+        textAlign: 'center',
+        color: 'purple'
+    },
+    cardNumber:{
+        textAlign: 'left',
+        color: 'white',
+        marginTop: 10,
+        fontSize: 18
+    },
+    button:{
+        backgroundColor: 'white',
+        padding: 15,
+        marginTop: 20,
+        marginBottom: 20,
+        borderRadius: 5,
+        alignSelf: 'center'
+    },
+    buttonText:{
+        fontSize: 17,
+        textAlign: 'center'
+    },
+    input:{
+        backgroundColor: 'white',
+        marginTop: 7,
+        marginBottom: 10,
+        borderRadius: 2,
+        padding: 5
+    }
+})

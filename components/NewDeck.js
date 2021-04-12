@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     heading:{
         fontSize: 25,
         fontFamily: 'sans-serif',
+        color: 'purple'
     },
     input:{
-        // backgroundColor: '#CBC3E3',
         width: '70%',
         marginBottom: 15,
         marginTop: 15,
@@ -90,14 +90,13 @@ const styles = StyleSheet.create({
         borderColor: 'green'
     },
     empty:{
-        // backgroundColor: '#CBC3E3',
         width: '70%',
         marginBottom: 15,
         marginTop: 15,
         padding: 10,
         borderRadius: 3,
         borderWidth: 1,
-        borderColor: 'red'
+        borderColor: 'purple'
     },
     button:{
         padding: 12,

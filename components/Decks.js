@@ -1,47 +1,95 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
-import {receiveDecks} from '../actions'
-import {getDecks} from '../utils/api'
+import { StyleSheet, Text, View , TouchableOpacity, ScrollView, Alert} from 'react-native';
+import {receiveDecks, deleteAllDecks} from '../actions'
+import {getDecks, deleteDecks } from '../utils/api'
 import {Ionicons} from '@expo/vector-icons'
+
+
 class Decks extends Component {
- componentDidMount(){
-  const {dispatch} = this.props
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    getDecks().then(decks => dispatch(receiveDecks(decks)));
+  }
+
+  
+  deleteDecks() {
+    const { dispatch } = this.props;
+    dispatch(deleteAllDecks());
+    deleteDecks();
+  }
+
+  deleteDecksAlert = ()=> {
+    Alert.alert(
+        `Delete all Decks`,
+        'You are attempting to delete all decks from storage. Do you want to continue?',
+        [
+            {
+                text: 'No',
+                onPress: () => null,
+                style: 'cancel'
+            },
+            {
+                text: 'Yes',
+                onPress: ()=> this.deleteDecks()
+            }
+        ]
+    )
 }
- 
   render() {
     const {deckList, decks, navigation} = this.props
-    const deckLength = decks.length
+
     return (
-      <>
+      <ScrollView>
+      
+        <TouchableOpacity  onPress={() => this.deleteDecksAlert()}>
+          <Text style={{textAlign: 'right', padding: 10}} >Clear All Decks</Text>
+        </TouchableOpacity>
+        <View style={styles.container}>
+       
+
         {!decks ? (
           <View style={styles.wrap}>
-          <Text style={styles.addText}>No decks available </Text>
+          <Text style={styles.addText}>No decks available. Create new deck. </Text>
           <TouchableOpacity style={styles.addButton} onPress={()=> this.props.navigation.navigate('New Deck')} >
             <Ionicons name='add-outline' size={70} color={'white'} style={{marginLeft: 5}} />
           </TouchableOpacity>
         </View>
         ):
         (
-          <View style={styles.container}>
-            {deckList.map((deckTitle)=> (
+          <View >
+            {deckList.map((deck, i)=> (
              <TouchableOpacity 
-             key={deckTitle} 
-             style={styles.deck} 
-             onPress={() => navigation.navigate("Deck", { title: deckTitle })}
+             key={i} 
+             style={styles.deck}
+             onPress={() => navigation.navigate("Deck", { title: deck.title })}
              >
-              <Text style={styles.title}>{deckTitle}</Text>
+              <Text style={styles.title}>{deck.title}</Text>
+              <Text style={styles.title}>
+  
+                {deck.questions.length > 1 ? (
+                <Text>{deck.questions.length} cards</Text>
+              ):(
+                <Text>{deck.questions.length} card</Text>
+              )}
+
+              </Text>
              </TouchableOpacity>
             ))}
           </View>
         )}
-      </>
+
+        </View>
+      </ScrollView>
     )
   }
 }
 
 function mapStateToProps(decks) {
-  const deckList = Object.keys(decks);
+  const deckList = Object.values(decks);
+ const length = deckList.questions
+ console.log(length);
   return {
     deckList,
     decks
@@ -54,15 +102,17 @@ export default connect(mapStateToProps)(Decks)
 
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        paddingTop: '15%'
+        
+        // alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: '5%'
       },
       wrap:{
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         flex: 1
       },
       headingWrapper:{
@@ -77,12 +127,12 @@ const styles = StyleSheet.create({
         textAlign: 'center'
       },
       deck:{
-        padding: 3,
-        width: '85%',
-        textAlign: 'center',
+        padding: 10,
+        width: '80%',
         marginBottom: 15,
-        height: '20%',
+        // height: '5%',
         justifyContent: 'center',
+        alignSelf: 'center',
         alignItems: 'center',
         backgroundColor: 'purple',
         borderRadius: 10
@@ -93,14 +143,14 @@ const styles = StyleSheet.create({
       },
       text:{
         color: '#fef8',
-        fontSize: 20
+        fontSize: 20,
       },
       addButton:{
         backgroundColor: 'purple',
         width: '21%',
         borderRadius: 50,
         justifyContent: 'center',
-        alignItems: 'center'
+        // alignItems: 'center'
       },
       addText:{
         fontSize: 17,

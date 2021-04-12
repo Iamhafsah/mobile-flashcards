@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {decks} from './helpers'
 
 
 const DECK_KEY = 'Hafsah:flashcards'
@@ -27,7 +26,7 @@ export const deleteSingleDeck = async(key)=> {
 }
 
 // To delete all decks
-export const deleteAllDecks = async()=> {
+export const deleteDecks = async()=> {
   await AsyncStorage.clear()
 }
 
