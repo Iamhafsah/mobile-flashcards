@@ -4,36 +4,6 @@ import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
 import {receiveDecks} from '../actions'
 import {getDecks} from '../utils/api'
 import {Ionicons} from '@expo/vector-icons'
-
-
-// const Decks = ({navigation}) => {
-//     return (
-//         <View style={styles.container}>
-        
-//         <View style={styles.headingWrapper}>
-//           <Text style={styles.heading}>Mobile Flashcards</Text>
-//           <Text style={styles.info}>Click on a deck to view cards</Text>
-//         </View>
-
-//         {Object.values(decks).map((deck, i)=> (
-//           <TouchableOpacity  
-//           key={i} 
-//           style={styles.deck} 
-//           onPress={()=> navigation.navigate('Cards')}
-//           >
-//             <Text style={styles.title}>{deck.title}</Text>
-//             <Text style={styles.text}>{deck.questions.length} cards</Text>
-//             <Text>{i}</Text>
-//           </TouchableOpacity>
-//         ))}
-//       </View>
-//     )
-// }
-
-
-
-// export default Decks
-
 class Decks extends Component {
  componentDidMount(){
   const {dispatch} = this.props
@@ -72,8 +42,6 @@ class Decks extends Component {
 
 function mapStateToProps(decks) {
   const deckList = Object.keys(decks);
-  const val = Object.values(decks)
-  console.log(typeof val.questions, 'o');
   return {
     deckList,
     decks

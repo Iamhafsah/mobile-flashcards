@@ -6,10 +6,11 @@ import reducer from './reducers'
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet} from 'react-native';
 import Home from './components/Home'
 // import Cards from './components/Cards'
 import DeckInterface from './components/DeckInterface'
+import QuizInterface from './components/QuizInterface'
 import AddCard from './components/AddCard'
 
 const Stack = createStackNavigator();
@@ -41,6 +42,16 @@ const StackConfig = {
         backgroundColor: purple
       }
     }
+  },
+  Quiz:{
+    name: "Quiz",
+    component: QuizInterface,
+    options: {
+      headerTintColor: white,
+      headerStyle:{
+        backgroundColor: purple
+      }
+    }
   }
 }
 const AppStack = () => {
@@ -49,6 +60,7 @@ const AppStack = () => {
       <Stack.Screen {...StackConfig['Home']}/>
       <Stack.Screen {...StackConfig['Deck']}/>
       <Stack.Screen {...StackConfig['AddCard']}/>
+      <Stack.Screen {...StackConfig['Quiz']}/>
     </Stack.Navigator>
   )
 }

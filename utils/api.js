@@ -18,12 +18,12 @@ export const getSingleDeck = async(key) => {
 }
 
 // To delete a single deck
-export const deleteDeck = async(key)=> {
+export const deleteSingleDeck = async(key)=> {
   const decks = await AsyncStorage.getItem(DECK_KEY)
   const data = JSON.parse(decks)
   data[key] = undefined
   delete data[key]
-  await AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
+  await AsyncStorage.setItem(DECK_KEY, JSON.stringify(data))
 }
 
 // To delete all decks
@@ -36,7 +36,7 @@ export const saveDeck = async(deckTitle) => {
   await AsyncStorage.mergeItem(DECK_KEY, JSON.stringify({
     [deckTitle]:{
       title: deckTitle,
-      question: []
+      questions: []
     }
   }))
   return await getDecks()
@@ -45,21 +45,8 @@ export const saveDeck = async(deckTitle) => {
 // To save card to deck
 export const saveCard = async (deckTitle, card) => {
   const decks = await AsyncStorage.getItem(DECK_KEY)
-  const data = JSON.parse(decks)
+  let data = JSON.parse(decks)
   data[deckTitle].questions.push(card)
-  console.log(data[deckTitle])
   AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
   
 }
-
-// export function saveCard(deckTitle, card) {
-//   return AsyncStorage.getItem(DECK_KEY).then(results => {
-//     const data = JSON.parse(results);
-//     Object.keys(data).map(info => {
-//       if (info === deckTitle) {
-//         data[info].questions.push(card);
-//       }
-//     });
-//     AsyncStorage.setItem(DECK_KEY, JSON.stringify(data));
-//   });
-// }

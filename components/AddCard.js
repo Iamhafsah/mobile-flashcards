@@ -23,7 +23,7 @@ class AddCard extends Component {
     }
     onSubmitCard = () => {
         const {question, answer} = this.state
-        const {dispatch, route} = this.props
+        const {dispatch, route, navigation} = this.props
         const { title } = route.params;
         const card = {question, answer}
      
@@ -31,7 +31,7 @@ class AddCard extends Component {
         if(question != '' && answer != ''){
             dispatch(addCard(card, title))
             saveCard(title, card)
-            //    console.log(title, card);
+            navigation.navigate('Deck')
             this.setState(prev=>({
                 ...prev,
                 question: '',
@@ -49,7 +49,7 @@ class AddCard extends Component {
     }
 
     render() {
-        const {navigation, route} = this.props
+        const {route} = this.props
         const { title } = route.params;
         const {question, answer} = this.state
 
@@ -59,7 +59,7 @@ class AddCard extends Component {
                 <Text> Add a new card to your {title} deck</Text>
 
                 <View>
-                   <Text>Enter a question {question}{answer} </Text>
+                   <Text>Enter a question </Text>
                    <TextInput
                    value={question}
                    onChangeText={this.onInputQuestion}
