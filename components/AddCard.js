@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View , TextInput, TouchableOpacity, Alert, StyleSheet, KeyboardAvoidingView} from 'react-native'
+import { Text, View , TextInput, TouchableOpacity, Alert, StyleSheet, KeyboardAvoidingView, Platform} from 'react-native'
 import { connect } from 'react-redux'
 import {addCard} from '../actions'
 import {saveCard} from '../utils/api'
@@ -58,7 +58,7 @@ class AddCard extends Component {
             <View style={styles.container}>
                 <Text style={styles.pageIntro}> Add a new card to your {title} deck</Text>
 
-                <KeyboardAvoidingView style={styles.innerContainer}>
+                <KeyboardAvoidingView  behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.innerContainer}>
                    <Text style={styles.cardNumber}>Enter a question </Text>
                    <TextInput
                    value={question}
